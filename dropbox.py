@@ -1,4 +1,3 @@
-
 import os
 import string
 
@@ -18,9 +17,14 @@ from CTFd.utils.uploads.uploaders import BaseUploader
 class DropboxUploader(BaseUploader):
     def __init__(self):
         super(BaseUploader, self).__init__()
-
-        self.oauth2_access_token = os.getenv("DROPBOX_OAUTH2_TOKEN") or get_app_config("DROPBOX_OAUTH2_TOKEN")
-        self.root_path = os.getenv("DROPBOX_ROOT_PATH") or get_app_config("DROPBOX_ROOT_PATH") or "/CTFd"
+        self.oauth2_access_token = os.getenv("DROPBOX_OAUTH2_TOKEN") or get_app_config(
+            "DROPBOX_OAUTH2_TOKEN"
+        )
+        self.root_path = (
+            os.getenv("DROPBOX_ROOT_PATH")
+            or get_app_config("DROPBOX_ROOT_PATH")
+            or "/CTFd"
+        )
         self.client = Dropbox(self.oauth2_access_token, timeout=100)
         self.write_mode = "add"  # can be set to overwrite
 
